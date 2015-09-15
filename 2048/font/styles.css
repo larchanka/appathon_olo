@@ -1,0 +1,11 @@
+
+@font-face {
+  font-family: "InterstatePro-Bold";
+  src: url("InterstatePro-Bold.eot?#iefix") format("embedded-opentype"),
+       url("InterstatePro-Bold.otf")  format("opentype"),
+	     url("InterstatePro-Bold.woff") format("woff"),
+       url("InterstatePro-Bold.ttf")  format("truetype"),
+       url("InterstatePro-Bold.svg#InterstatePro-Bold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
