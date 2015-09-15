@@ -4,7 +4,8 @@ var router = express.Router();
 router.get('/auth', require('./auth.js').get);
 router.post('/auth', require('./auth.js').post);
 
-router.get('/appauth', require('./appauth.js'));
+router.get('/appauth', require('./appauth.js').get);
+router.post('/appauth', require('./appauth.js').post);
 
 router.get('/score', require('./score.js'));
 
