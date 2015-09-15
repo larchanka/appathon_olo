@@ -24,7 +24,7 @@ var HUB = function() {
 			_defaultLeaderboardItemsNum = 10,
 			_hubappId = '',
 			_initialized = false,
-			_apiUrl = 'http://olo.herokuapp.com';
+			_apiUrl = 'http://192.168.192.65:5000';
 
 	var _api = {
 
@@ -40,7 +40,7 @@ var HUB = function() {
 				})
 				.then(function() {
 					return _api.checkBundle(appId)
-				})		 
+				})
 				.then(function(bundleResponse) {
 					return bundleResponse.json();
 				})
@@ -118,7 +118,7 @@ var HUB = function() {
 			return fetch(_apiUrl + '/api/app?appId=' + _appId);
 		}
 	};
-	
+
 	return {
 
 		/**

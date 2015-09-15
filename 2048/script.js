@@ -332,5 +332,7 @@ initBest();
 
 var hub = new HUB();
 hub.init('com.olo.hub', function() {
-	console.log(hub.user.getData());
+	var userdata = hub.user.getData();
+	$('.gamehub span').html(userdata.userData.givenName);
+	$('.gamehub').show();
 });
