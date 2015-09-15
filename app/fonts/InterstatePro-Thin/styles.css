@@ -1,0 +1,11 @@
+
+@font-face {
+  font-family: "InterstatePro-Thin";
+  src: url("InterstatePro-Thin.eot?#iefix") format("embedded-opentype"),
+       url("InterstatePro-Thin.otf")  format("opentype"),
+	     url("InterstatePro-Thin.woff") format("woff"),
+       url("InterstatePro-Thin.ttf")  format("truetype"),
+       url("InterstatePro-Thin.svg#InterstatePro-Thin") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
