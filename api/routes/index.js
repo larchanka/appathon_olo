@@ -19,7 +19,8 @@ router.get('/appauth', require('./appauth.js').get);
  */
 router.post('/appauth', require('./appauth.js').post);
 
-router.get('/score', require('./score.js'));
+router.get('/score', require('./score.js').get);
+router.post('/score', require('./score.js').post);
 
 router.get('/', function(req, res) {
   res.json({ message: 'hooray! welcome to our api!' });   
