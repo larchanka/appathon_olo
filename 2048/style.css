@@ -1,0 +1,141 @@
+html {
+	text-align: center; font-family: 'InterstatePro-Bold', sans-serif;
+	color: #444; background-color: #EEE; height: 100%; min-height: 100%;}
+body { height: 100%; padding: 0;  min-height: 100%; margin: 20px;}
+
+
+header, #grid, #level, footer {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+header a, nav a {
+	display: inline-block; padding: 2px 4px; font-size: 12px;
+	background-color: white; border-radius: 3px; color: #444;
+	text-decoration: none; box-shadow: 0px 3px 0px #CCC; cursor: pointer; }
+header a:active, nav a:active {
+	box-shadow: 0px 0px 0px #CCC; position: relative; top: 3px; }
+
+header { position: absolute; top: 40px; left: 40px;  }
+h1 {
+
+	font-size: 80px;  margin: 0px; }
+header div {
+	position: absolute; top: 0px; right: 0px;
+	display: inline-block; width: 250px; }
+header p { margin: 0px; }
+.score {
+	position: absolute; top: 40px; right: 40px; font-size: 40px; width: 200px; text-align: right;
+}
+#score { line-height: 50px; margin: 0; }
+
+.gamehub {
+	margin-top: 40px;
+	font-size: .5em;
+}
+
+#game { position: absolute; top: 50%; left: 50%; margin-top: -250px; margin-left: -250px; width: 500px; height: 500px; }
+#game > div { position: absolute; top: 0px; left: 0px;  }
+
+#grid {
+	width: 480px; height: 480px; padding: 10px;
+	background-color: #DDD;	border-radius: 8px;
+	 }
+#grid div {
+	display: inline-block; width: 110px; height: 110px;
+	margin: 5px; border-radius: 5px; float: left;
+	line-height: 110px; font-size: 60px;
+	 background-color: white;
+	 color: white;}
+
+#grid div.bv { background-color: white;  }
+#grid div.b2 { background-color: #0ad;  }
+#grid div.b4 { background-color: #00DDAA; }
+#grid div.b8 { background-color: #00DD34; }
+#grid div.b16 { background-color: #DDD900; }
+#grid div.b32 { background-color: #DD9A00; }
+#grid div.b64 { background-color: #DD5D00; }
+#grid div.b128 { background-color: #DD0000;  font-size: 50px; }
+#grid div.b256 { background-color: #FFE5CA;  font-size: 50px; }
+#grid div.b512 { background-color: #FFA200;  color: white; font-size: 50px; }
+#grid div.b1024 { background-color: #FFFA87;font-size: 40px;}
+#grid div.b2048 { background-color: #333; ; color: white; font-size: 40px; }
+
+#grid.over div {
+	background-color: #CCC; box-shadow: 0px 0px 15px #AAA inset, 0px 3px 0px #CCC; }
+
+#touch { width: 500px; height: 500px; }
+#touch div { position: absolute; }
+#touch div:nth-child(1) { top: 15px; left: 135px; width: 230px; height: 110px; }
+#touch div:nth-child(2) { top: 135px; left: 15px; width: 110px; height: 230px; }
+#touch div:nth-child(3) { bottom: 135px; right: 15px; width: 110px; height: 230px; }
+#touch div:nth-child(4) { bottom: 15px; right: 135px; width: 230px; height: 110px; }
+
+#text { color: black; position: absolute; height: 16px; bottom: 50px; left: 0; width: 100%; }
+#text p { position: absolute; top: 0px; margin-bottom: 0px; }
+#text p:first-child { left: 40px; }
+#text p:last-child { right: 40px; }
+
+#bar {
+	position: absolute; height: 20px; bottom: 0;
+	left: 0;
+	width: 100%;
+	border-radius: 2.5px; background-color: #DDD; }
+#bar div {
+	height: 20px; width: 0%; background-color: #0ad; }
+
+nav { margin: 50px 0px 20px; }
+nav a { font-size: 20px; margin: 0px 10px; padding: 2px 8px; }
+
+footer { font-size: 12px; color: #777; }
+footer a { color: #26F; text-decoration: none; }
+footer a:hover { color: #38F; text-decoration: underline; }
+
+.leaderboard {
+	position: absolute;
+	font-size: 1.5em;
+	top: 50%;
+	left: 50%;
+	margin-left: -250px;
+	margin-top: -250px;
+	width: 500px;
+	height: 500px;
+}
+
+.leaderboard table {
+	width: 100%;
+}
+
+.leaderboard th {
+    font-family: 'InterstatePro-Bold', sans-serif;
+}
+
+.leaderboard tr:nth-child(2n) {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.leaderboard tr th:first-child,
+.leaderboard tr th:last-child,
+.leaderboard tr td:first-child,
+.leaderboard tr td:last-child {
+    text-align: right;
+    padding: .3em 1em;
+}
+
+.gameover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 50%;
+	margin-left: -50%;
+	height: 300px;
+	line-height: 300px;
+	top: 50%;
+	margin-top: -150px;
+}
