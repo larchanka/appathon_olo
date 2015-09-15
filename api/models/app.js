@@ -72,8 +72,9 @@ AppSchema.methods.getScores = function () {
     }
   });
 
+  console.log('current scores', players);
   return players.sort(function (a, b) {
-    return a.score > b.score;
+    return Number(a.score) < Number(b.score);
   });
 }
 
@@ -101,7 +102,7 @@ AppSchema.methods.setScore = function (user, score) {
   var currentScore = players[username];
   if (!currentScore) {
       this.players[username] = score;
-  } else if (currentScore < score) {
+  } else if (Number(currentScore) < Number(score)) {
     this.players[username] = score;
   }
 
