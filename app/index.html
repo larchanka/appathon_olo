@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GameHub</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="fonts/InterstatePro-Bold/styles.css">
+    <link rel="stylesheet" type="text/css" href="fonts/InterstatePro-Regular/styles.css">
+</head>
+<body>
+    <ul class="tabbar">
+        <li class="tabbar--item" data-route="/">Games</li>
+        <li class="tabbar--item" data-route="/friends">Friends</li>
+        <li class="tabbar--item" data-route="/me">Me</li>
+    </ul>
+
+    <div class="content" data-page="/">
+        <ul class="list-view">
+            <li class="list-view--item clickable">
+                <div class="list-view--media">
+                    <img src="images/game.jpg" />
+                </div>
+                <div class="list-view--description">
+                    <h2>Game 01</h2>
+                    <p>#2 among your friends</p>
+                    <p>#126 among 1237 players</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content" data-page="/friends" style="display: none;">
+        <ul class="list-view">
+            <li class="list-view--item clickable">
+                <div class="list-view--media">
+                    <img src="images/game.jpg" />
+                </div>
+                <div class="list-view--description">
+                    <h2>Friend 01</h2>
+                    <p>Plays 4 games</p>
+                    <p>1 game in common</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content" data-page="/me" style="display: none;">
+        <div class="usermedia">
+            <div class="usermedia--wrapper">
+                <img class="usermedia--pic" src="images/game.jpg" />
+                <h2 class="usermedia--heading">Firstname Lastname</h2>
+                <p class="usermedia--description">1 game</p>
+            </div>
+        </div>
+
+
+        <div class="last-played">
+            <h3 class="media-row--heading">Most Successful Games</h3>
+            <div class="last-played--wrapper">
+                <ul class="list-view list-view__row">
+                    <li class="list-view--item">
+                        <div class="list-view--media">
+                            <img src="images/game.jpg" />
+                        </div>
+                        <div class="list-view--description">
+                            <h5>2048</h5>
+                            <p>#124</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/consts.js"></script>
+    <script src="js/dNav.js"></script>
+    <script src="js/page.js"></script>
+    <script src="js/Menu.js"></script>
+    <script src="js/GameHub.js"></script>
+    <script>
+
+        window.onerror = function(msg, url, linenumber) {
+            $('.content').append('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+            return true;
+        }
+
+        GameHub.Menu.init();
+        dNav.init();
+    </script>
+</body>
+</html>

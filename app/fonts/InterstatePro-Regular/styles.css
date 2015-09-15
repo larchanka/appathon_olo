@@ -1,0 +1,11 @@
+
+@font-face {
+  font-family: "InterstatePro-Regular";
+  src: url("InterstatePro-Regular.eot?#iefix") format("embedded-opentype"),
+       url("InterstatePro-Regular.otf")  format("opentype"),
+	     url("InterstatePro-Regular.woff") format("woff"),
+       url("InterstatePro-Regular.ttf")  format("truetype"),
+       url("InterstatePro-Regular.svg#InterstatePro-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
