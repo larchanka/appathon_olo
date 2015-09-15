@@ -3,6 +3,7 @@ var AppModel = require('../models/app.js');
 
 module.exports = {
   post: function (req, res) {
+    console.log('post:score.js', req.body);
 
     var score = req.body.score;
     var appId = req.body.appId;
