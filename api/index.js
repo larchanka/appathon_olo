@@ -8,9 +8,13 @@ require('./db.js');
 app.set('port', (process.env.PORT || 5000));
 
 app.use(function(req, res, next) {
+  console.log('req', req.method);
   res.header("Access-Control-Allow-Origin", "http://localhost:9999");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie, Set-Cookie");
+  res.header("Access-Control-Allow-Credentials", true);
+
+  if (req.method.toLowerCase() == 'options') {
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  }
   next();
 });
 
