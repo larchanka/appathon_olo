@@ -20,7 +20,6 @@ module.exports = {
     })
 
     .then(function (app) {
-      console.log('app is', JSON.stringify(app.players));
       return app.setScore(currentUser, score);
     })
 
@@ -37,7 +36,6 @@ module.exports = {
     })
 
     .catch(function (err) {
-      console.log(err.stack);
       return res.send({
         type: 'ERROR',
         message: err.message
@@ -47,6 +45,8 @@ module.exports = {
   },
 
   get: function (req, res) {
+    console.log('GET /api/score', req.query);
+
     var appId = req.query.appId;
     var session = req.query.session;
     var currentUser;

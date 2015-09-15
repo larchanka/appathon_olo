@@ -2,7 +2,7 @@ var AppModel = require('../models/app.js');
 
 module.exports = {
   get: function (req, res) {
-    console.log('GET: app.js', req.query);
+    console.log('GET /api/app', req.query);
 
     var appId = req.query.appId;
 
@@ -24,5 +24,6 @@ module.exports = {
   },
 
   post: function (req, res) {
+    console.log('POST /api/app', req.body);
   }
 };
