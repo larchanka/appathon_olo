@@ -32,7 +32,7 @@ var HUB = function() {
 				.then(function(data) {
 					_userData = data.message.details;
 					_userToken = data.message.token;
-					document.cookie = 'session=' + data.message.token;
+					// document.cookie = 'session=' + data.message.token;
 				})
 				.then(function() {
 					return _api.checkBundle(appId)
@@ -91,8 +91,12 @@ var HUB = function() {
 
 		// Score
 		setScore: function(score) {
+			console.log(_userToken)
 			return fetch(_apiUrl + '/api/score', {
 				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				body: JSON.stringify({
 					score: score,
 					appId: _appId,
@@ -262,14 +266,14 @@ var HUB = function() {
 					.then(function(response) {
 						return response.json();
 					}).then(function(data) {
-						_data.score = data[0];
+						_data.score = data.message[0];
 						return _api.getLeaderBoard();
 					})
 					.then(function(response) {
 						return response.json();
 					})
 					.then(function(data) {
-						_data.leaderboard = data;
+						_data.leaderboard = data.message;
 						return _data;
 					});
 			},
