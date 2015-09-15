@@ -5,9 +5,15 @@ var AppSchema = mongoose.Schema({
   players: mongoose.Schema.Types.Mixed
 });
 
+
+var availableApps = {
+  'com.olo.test': true,
+  'com.olo.hub': true
+};
+
 var auth = function (id) {
   return new Promise(function (res, rej) {
-    if (id == 'com.olo.test') {
+    if (id in availableApps) {
       return res(id);
     }
 
