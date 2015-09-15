@@ -3,7 +3,7 @@ var superagent = require('superagent');
 
 var UserSchema = mongoose.Schema({
   username: String,
-  password: String,
+  token   : String,
   details: mongoose.Schema.Types.Mixed
 });
 
@@ -33,6 +33,33 @@ var auth = function (username, password) {
   });
 }
 
+UserSchema.statics.validate = function (token) {
+  // will fetch username from database, take it's cookie and will try to reauthenticate
+  // into the system with the token
+  var UserModel = this.model('User');
+
+  return new Promise(function (res, rej) {
+
+    UserModel.find({
+      token: token || 'unknown'
+    }, function (err, users) {
+      if (err) {
+        return rej(err);
+      }
+
+      if (users.length) {
+        user = users[0];
+
+        // XXX: validate token
+        return res(user);
+      } 
+
+      return rej();
+    });
+
+  });
+}
+
 UserSchema.statics.auth = function (username, password) {
 
   var UserModel = this.model('User');
@@ -56,9 +83,11 @@ UserSchema.statics.auth = function (username, password) {
 
         auth(username, password).then(function (obj) {
           user.details = obj.customer;
+          user.token = obj.oespToken;
+
           user.save(function () {
-            console.log('will save');
             return res({
+              token: user.token,
               details: user.details
             });
           });
