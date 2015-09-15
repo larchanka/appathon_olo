@@ -3,7 +3,7 @@ var AppModel = require('../models/app.js');
 
 module.exports = {
   post: function (req, res) {
-    console.log('post:score.js', req.body);
+    console.log('POST /api/score', req.body);
 
     var score = req.body.score;
     var appId = req.body.appId;
@@ -13,20 +13,15 @@ module.exports = {
 
     auth.getSessionUser(session).then(function (user) {
       currentUser = user
-    }, function (err) {
-      console.log('error');
-      throw new Error('Unauthenticated');
     })
 
     .then(function() {
       return AppModel.auth(appId)
-    }, function (err) {
-      console.log('error');
-      throw new Error('Wrong App ID');
     })
 
     .then(function (app) {
-      return app.setScore(user, score);
+      console.log('app is', JSON.stringify(app.players));
+      return app.setScore(currentUser, score);
     })
 
     .then(function () {
@@ -58,9 +53,6 @@ module.exports = {
 
     auth.getSessionUser(session).then(function (user) {
       currentUser = user
-    }, function (err) {
-      console.log('error');
-      throw new Error('Unauthenticated');
     })
 
     .then(function() {

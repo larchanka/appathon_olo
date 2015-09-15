@@ -258,3 +258,69 @@ ul {
     left: auto;
     right: 0;
 }
+
+.game {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.game--wrapper {
+    display: table-cell;
+    width: 33.33333%;
+    height: 100%;
+    padding: 1em;
+    vertical-align: top;
+    text-align: center;
+}
+
+.game--wrapper:last-child {
+    width: 66.66667%;
+    text-align: left;
+}
+
+.game--wrapper:first-child h2 {
+    margin-top: 1em;
+    font-size: .75em;
+}
+
+.game--wrapper:last-child h2 {
+    font-size: .75em;
+}
+
+
+
+.game--wrapper p {
+    font-size: .5em;
+}
+
+.game--wrapper img {
+    width: 100%;
+    border: 4px solid white;
+    border-radius: 100%;
+}
+
+.leaderboard {
+    width: 100%;
+    height: 100%;
+    font-size: .5em;
+    border: 0;
+    padding: 0;
+}
+
+.leaderboard th {
+    border-bottom: 1px solid white;
+    font-family: InterstatePro-Bold, sans-serif;
+}
+
+.leaderboard tr:nth-child(2n) {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.leaderboard tr th:first-child,
+.leaderboard tr th:last-child,
+.leaderboard tr td:first-child,
+.leaderboard tr td:last-child {
+    text-align: right;
+    padding: 0 1em;
+}
