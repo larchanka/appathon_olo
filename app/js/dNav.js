@@ -10,37 +10,48 @@
         keyActions: {}
     };
 
-    var onKeyDown = function (e) {
-        switch (e.keyCode) {
-            case CONTROL_KEYS['left']:
-                dNav.moveSelection([-1, 0]);
-                break;
-            case CONTROL_KEYS['up']:
-                dNav.moveSelection([0, -1]);
-                break;
-            case CONTROL_KEYS['right']:
-                dNav.moveSelection([1, 0]);
-                break;
-            case CONTROL_KEYS['down']:
-                dNav.moveSelection([0, 1]);
-                break;
-            case CONTROL_KEYS['ok']:
-                dNav.click(curEl);
-                break;
-        }
 
-        $.each(keyActions, function (i, keyAction) {
-            if (e.keyCode == keyAction['keyCode'] && typeof keyAction['action'] == 'function') {
-                keyAction['action'](e);
-            }
-        });
-
-        e.preventDefault();
-        return false;
-    };
+    var prevKeyDown = null;
 
     _bindKeyboardEvents = function (keyActions) {
-        $(dNav.options.containerSelector).off('click').off('keydown', onKeyDown);
+        var onKeyDown = function (e) {
+            switch (e.keyCode) {
+                case CONTROL_KEYS['left']:
+                    dNav.moveSelection([-1, 0]);
+                    break;
+                case CONTROL_KEYS['up']:
+                    dNav.moveSelection([0, -1]);
+                    break;
+                case CONTROL_KEYS['right']:
+                    dNav.moveSelection([1, 0]);
+                    break;
+                case CONTROL_KEYS['down']:
+                    dNav.moveSelection([0, 1]);
+                    break;
+                case CONTROL_KEYS['ok']:
+                    dNav.click(curEl);
+                    break;
+                case CONTROL_KEYS['menu']:
+                  var parentWindow = window.parent;
+                  if (parentWindow && parentWindow.AppStore) {
+                    parentWindow.AppStore.emit('quit');
+                  }
+                  break;
+            }
+
+            $.each(keyActions, function (i, keyAction) {
+                if (e.keyCode == keyAction['keyCode'] && typeof keyAction['action'] == 'function') {
+                    keyAction['action'](e);
+                }
+            });
+
+            e.preventDefault();
+            return false;
+        };
+
+        $(dNav.options.containerSelector).off('click').off('keydown', prevKeyDown);
+
+        prevKeyDown = onKeyDown;
 
         $(dNav.options.containerSelector).on('click', dNav.options.elSelector, function () {
             eval($(this).data('action'));
