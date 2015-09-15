@@ -10,13 +10,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var router = express.Router();
-
-router.get('/', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });   
-});
-
-app.use('/api', router);
+app.use('/api', require('./routes'));
 
 app.get('/', function(request, response) {
   response.send('Hello world');
