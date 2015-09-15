@@ -31,6 +31,8 @@ var HUB = function() {
 				})
 				.then(function(data) {
 					_userData = data.message.details;
+					_userToken = data.message.token;
+					document.cookie = 'session=' + data.message.token;
 				})
 				.then(function() {
 					return _api.checkBundle(appId)
@@ -81,29 +83,31 @@ var HUB = function() {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					appId: appId
+					appId: appId,
+					session: _userToken
 				})
 			});
 		},
 
 		// Score
 		setScore: function(score) {
-			return fetch(_apiUrl + '/score/set', {
+			return fetch(_apiUrl + '/api/score', {
 				method: 'POST',
 				body: JSON.stringify({
 					score: score,
-					appId: _appId
+					appId: _appId,
+					session: _userToken
 				})
 			});
 		},
 
-		getScore: function() {
-			return fetch(_apiUrl + '/score/get?appId=' + _appId);
+		getScore: function(appId) {
+			return fetch(_apiUrl + '/api/score?appId=' + (appId || _appId) + '&session=' + _userToken);
 		},
 
 		// Leaderboard
 		getLeaderBoard: function(itemsNum) {
-			return fetch(_apiUrl + '/leaderboard/get?itemsNum=' + itemsNum + '&appId=' + _appId);
+			return fetch(_apiUrl + '/leaderboard/get?itemsNum=' + itemsNum + '&appId=' + _appId + '&session=' + _userToken);
 		}
 	};
 	
@@ -188,29 +192,101 @@ var HUB = function() {
 		},
 
 		// TODO: Friends methods
-		// Unsupported methods
 		friends: {
+
+			/**
+				* Add friend
+				* TODO
+				*
+				* @returns {void}
+				**/
 			add: function() {
-				//TODO
+				//Magic
 			},
 
+			/**
+				* Get friends list
+				*
+				* @returns {array}
+				**/
 			get: function() {
 				return [
 					{
 						id: 1,
-						name: 'Ilya Pukhalski'
+						name: 'Ilya Pukhalski',
+						image: './images/friends/1.png',
+						games: 4,
+						common: 1
 					},
 					{
 						id: 2,
-						name: 'Maks Nemijs'
+						name: 'Maks Nemijs',
+						image: './images/friends/2.jpg',
+						games: 2,
+						common: 1
 					},
 					{
 						id: 3,
-						name: 'Mikhail Larchanka'
+						name: 'Mikhail Larchanka',
+						image: './images/friends/3.png',
+						games: 5,
+						common: 0
+					}
+				];
+			}
+		},
+
+		games: {
+			get: function(appId) {
+				if (!appId) {
+					return false;
+				}
+
+				var _data = {
+					score: 0,
+					game: {
+						appdId: 'com.olo.test',
+						name: '2048 Free',
+						description: 'Nice game description. List of all features and possibilities.',
+						path: './game/index.html',
+						image: './images/game.jpg',
+						stats: {
+							friends: 2,
+							total: 126
+						}
+					},
+					leaderboard: []
+				};
+
+				return _api.getScore(appId)
+					.then(function(response) {
+						return response.json();
+					}).then(function(data) {
+						_data.score = data[0];
+						return _api.getLeaderBoard();
+					})
+					.then(function(response) {
+						return response.json();
+					})
+					.then(function(data) {
+						_data.leaderboard = data;
+						return _data;
+					});
+			},
+
+			list: function() {
+				return [
+					{
+						appdId: 'com.olo.test',
+						name: '2048 Free',
+						image: './images/game.jpg',
+						stats: {
+							friends: 2,
+							total: 126
+						}
 					}
 				];
 			}
 		}
 	};
-
 };
