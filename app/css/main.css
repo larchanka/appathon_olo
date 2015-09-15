@@ -36,9 +36,29 @@ ul {
     width: 100%;
 }
 
-.tabbar {
+.logo {
     position: fixed;
     top: 0;
+    width: 100%;
+    height: 2em;
+    left: 0;
+    line-height: 2em;
+    text-align: center;
+    z-index: 3;
+    right: 0;
+    text-align: center;
+    background-color: rgba(0,0,0,0.75);
+}
+
+.logo img {
+    margin-top: .75em;
+    display: inline-block;
+    height: 1em;
+}
+
+.tabbar {
+    position: fixed;
+    top: 2em;
     height: 2em;
     line-height: 2em;
     z-index: 2;
@@ -64,11 +84,11 @@ ul {
     position: absolute;
     overflow: hidden;
     top: 0;
-    padding-top: 2em;
+    padding-top: 4em;
     bottom: 0;
     left: 0;
     right: 0;
-    background: url('../images/HZN_bg_gradient.jpg') 50% 0;
+    background: url('../images/HZN_bg_gradient.jpg') 50% 10%
 }
 
 .list-view {
@@ -106,13 +126,12 @@ ul {
 .list-view--media {
     display: table-cell;
     vertical-align: middle;
-    width: 20%;
+    width: 15%;
 }
 
 .list-view__row .list-view--media {
     display: block;
     width: 100%;
-    height: 2em;
     text-align: center;
 }
 
@@ -122,10 +141,14 @@ ul {
     border: 4px solid white;
 }
 
+.list-view--item {
+    font-size: .75em;
+}
+
 .list-view__row .list-view--media img {
     display: inline-block;
-    height: 2em;
-    width: 2em;
+    height: 1.5em;
+    width: 1.5em;
 }
 
 .list-view--description {
@@ -157,7 +180,7 @@ ul {
     display: table;
     width: 100%;
     position: absolute;
-    top: 2em;
+    top: 4em;
     padding-bottom: 6em;
     height: 100%;
 }
@@ -183,7 +206,7 @@ ul {
 }
 
 .usermedia--description {
-
+    font-size: 0.5em;
 }
 
 .last-played {
