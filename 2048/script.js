@@ -219,7 +219,13 @@ function updateBest() {
 
 function gameOver() {
 	gridElem.setAttribute("class", "over");
-	console.log("LOL");
+	$('#game').hide();
+	$('.gameover').show();
+	setTimeout(function() {
+		$('.gameover').hide();
+		$('.leaderboard').show();
+	}, 2000);
+
 }
 
 // UTIL FUNCTIONS
@@ -256,7 +262,7 @@ function spawnRand() {
 		grid[y][x] = randomValue;
 	} else {
 		if(!checkMovable()) {
-			// gameOver();
+			 gameOver();
 		}
 	}
 }
@@ -299,9 +305,15 @@ function initGrid() {
 function init() {
 	gridElem.removeAttribute("class");
 
+	$('.gameover').hide();
+	$('.leaderboard').hide();
+	$('#game').show();
+
 	initScore();
 	initBest();
 	initGrid();
+
+
 }
 
 // INITIAL SETUP
