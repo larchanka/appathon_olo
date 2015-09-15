@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-
+var url = ('MONGOLAB_URI' in process.env) ? process.env.MONGOLAB_URI : 'mongodb://localhost/olo';
 
 // require all the models
 require('./models');
 
-mongoose.connect('mongodb://localhost/olo');
+mongoose.connect(url);
 
 var db = mongoose.connection;
 
