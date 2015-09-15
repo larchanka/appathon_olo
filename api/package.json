@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"prestart": "npm install",
-	"start": "node index.js",
+    "prestart": "npm install",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "mongoose": "^4.1.7"
+    "mongoose": "^4.1.7",
+    "superagent": "^1.4.0"
   }
 }
