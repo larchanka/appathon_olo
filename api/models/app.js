@@ -77,7 +77,7 @@ AppSchema.methods.setScore = function (user, score) {
 
   var players = this.players;
   if (!players) {
-    this.players = {};
+    players = this.players = {};
   }
 
   var currentScore = players[username];
