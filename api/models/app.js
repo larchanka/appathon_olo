@@ -59,6 +59,21 @@ AppSchema.statics.auth = function (id) {
   });
 }
 
+AppSchema.methods.getScores = function () {
+  var players = this.players;
+  if (!players) {
+    players = {};
+  }
+
+  players = Object.keys(players).map(function (username) {
+    return players[username];
+  });
+
+  return players.sort(function (a, b) {
+    return a.score > b.score;
+  });
+}
+
 AppSchema.methods.saveMe = function () {
   var app = this;
   return new Promise(function (res, rej) {
