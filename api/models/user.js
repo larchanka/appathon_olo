@@ -8,6 +8,8 @@ var UserSchema = mongoose.Schema({
 });
 
 var auth = function (username, password) {
+  console.log('Will try to connect using', username, password);
+
   return new Promise(function (res, rej) {
     superagent
     .post('https://web-api2.horizon.tv/oesp/api/NL/nld/web/session')
@@ -17,6 +19,7 @@ var auth = function (username, password) {
       password: password
     })
     .end(function (error, response) {
+      console.log('error is', error);
       if (error) {
         return rej(error);
       }
