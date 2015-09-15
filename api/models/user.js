@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
 var superagent = require('superagent');
 
+var AppModel = require('./app.js');
+var ScoreModel = require('./score.js');
+
 var UserSchema = mongoose.Schema({
   username: String,
   token   : String,
-  details: mongoose.Schema.Types.Mixed
+  details: mongoose.Schema.Types.Mixed,
+  scores: [] //score ids
 });
 
 var auth = function (username, password) {
@@ -31,6 +35,32 @@ var auth = function (username, password) {
       res(response.body);
     });
   });
+}
+
+UserSchema.methods.saveMe = function () {
+  var user = this;
+  return new Promise(function (res, rej) {
+    user.save(function (err) {
+      if (err) { return rej(err); }
+      return res();
+    });
+  });
+}
+
+UserSchema.methods.getScores = function () {
+  return this.scores.sort(function (a, b) {
+    return a.date < b.date;
+  });
+}
+
+UserSchema.methods.addScore = function (appId, score) {
+
+  this.scores.push({
+    score: score,
+    date: new Date().getTime()
+  });
+
+  return this.saveMe();
 }
 
 UserSchema.statics.validate = function (token) {

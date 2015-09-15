@@ -1,25 +1,32 @@
 var mongoose = require('mongoose');
 
 var AppSchema = mongoose.Schema({
-  appId: String
+  appId: String,
+  players: mongoose.Schema.Types.Mixed
 });
 
 var auth = function (id) {
   return new Promise(function (res, rej) {
     if (id == 'com.olo.test') {
-      return res();
+      return res(id);
     }
 
-    return rej();
+    return rej(new Error('No id'));
   });
 }
 
 AppSchema.statics.auth = function (id) {
   var AppModel = this.model('App');
 
+  if (!id) {
+    return new Promise(function (res, rej) {
+      return rej(new Error('Empty id'));
+    });
+  }
+
   return new Promise(function (res, rej) {
     AppModel.find({
-      id: id
+      appId: id
     }, function (err, apps) {
       if (err) {
         return rej(err);
@@ -35,12 +42,13 @@ AppSchema.statics.auth = function (id) {
       }
 
       auth(id).then(function (obj) {
+        
         app.save(function (err) {
           if (err) {
             return res(err);
           }
 
-          return res(obj);
+          return res(app);
         });
       }, function (err) {
         rej(err);
@@ -49,6 +57,37 @@ AppSchema.statics.auth = function (id) {
     })
 
   });
+}
+
+AppSchema.methods.saveMe = function () {
+  var app = this;
+  return new Promise(function (res, rej) {
+    app.save(function (err) {
+      if (err) { return rej(err); }
+      return res();
+    });
+  });
+};
+
+AppSchema.methods.setScore = function (user, score) {
+  // app is found
+  var username = user.username;
+
+  this.markModified('players');
+
+  var players = this.players;
+  if (!players) {
+    this.players = {};
+  }
+
+  var currentScore = players[username];
+  if (!currentScore) {
+      this.players[username] = score;
+  } else if (currentScore < score) {
+    this.players[username] = score;
+  }
+
+  return this.saveMe();
 }
 
 module.exports = mongoose.model('App', AppSchema);
