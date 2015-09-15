@@ -7,13 +7,25 @@
 <body>
 	
 </body>
-<!-- <script src="src/fetch.js"></script> -->
+<script src="src/fetch.js"></script>
 <script src="src/hub-sdk.js"></script>
 <script>
 	var hub = new HUB();
 	hub.init('com.olo.test',
 		function() {
-			
+			hub.score.set('300')
+			.then(function() {
+				return hub.score.get();
+			})
+			.then(function(response) {
+				return response.json();
+			})
+			then(function(data) {
+				console.log(data);
+			})
+			.catch(function(err) {
+				console.error(err);
+			});
 		},
 
 		function(err) {

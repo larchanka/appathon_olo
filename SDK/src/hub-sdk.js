@@ -8,6 +8,10 @@ var HUB = function() {
 	var TMP = {
 		username: 'hackathon19',
 		password: 'Hackathon19!'
+		// username: 'orionprodnl09',
+		// password: 'Welkom910'
+		// username: 'nvierhout',
+		// password: 'password'
 	};
 
 	var _userName,
@@ -111,7 +115,7 @@ var HUB = function() {
 
 		// Leaderboard
 		getLeaderBoard: function(itemsNum) {
-			return fetch(_apiUrl + '/leaderboard/get?itemsNum=' + itemsNum + '&appId=' + _appId + '&session=' + _userToken);
+			return fetch(_apiUrl + '/api/app?appId=' + _appId);
 		}
 	};
 	
@@ -159,9 +163,9 @@ var HUB = function() {
 
 			set: function(score) {
 
-				if (!score || typeof score !== 'number') {
-					return false;
-				}
+				// if (!score || typeof score !== 'number') {
+				// 	return false;
+				// }
 
 				return _api.setScore(score);
 			},
@@ -187,9 +191,9 @@ var HUB = function() {
 				* @returns {promise}
 				**/
 			get: function(itemsNum) {
-				if (typeof itemsNum !== 'number') {
-					return false;
-				}
+				// if (typeof itemsNum !== 'number') {
+				// 	return false;
+				// }
 
 				return _api.getLeaderBoard(itemsNum || _defaultLeaderboardItemsNum);
 			}
@@ -241,6 +245,12 @@ var HUB = function() {
 		},
 
 		games: {
+
+			/**
+				* Get Game information
+				*
+				* @returns {object}
+				**/
 			get: function(appId) {
 				if (!appId) {
 					return false;
@@ -278,6 +288,11 @@ var HUB = function() {
 					});
 			},
 
+			/**
+				* Get Games list
+				*
+				* @returns {array}
+				**/
 			list: function() {
 				return [
 					{
