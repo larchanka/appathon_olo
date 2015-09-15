@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var UserModel = require('../models/user.js');
 
 module.exports = {
 
@@ -10,9 +10,8 @@ module.exports = {
 
   post: function (req, res) {
     var body = req.body;
-    var User = mongoose.model('User');
 
-    User.auth(body.username, body.password).then(function (user) {
+    UserModel.auth(body.username, body.password).then(function (user) {
       return res.send({
         type: 'OK',
         message: user
