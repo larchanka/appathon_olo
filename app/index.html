@@ -19,12 +19,22 @@
 
     <div class="content" data-page="/">
         <ul class="list-view">
-            <li class="list-view--item clickable">
+            <li class="list-view--item clickable" data-action="page('/game/1')">
                 <div class="list-view--media">
                     <img src="images/game.jpg" />
                 </div>
                 <div class="list-view--description">
                     <h2>Game 01</h2>
+                    <p>#2 among your friends</p>
+                    <p>#126 among 1237 players</p>
+                </div>
+            </li>
+            <li class="list-view--item clickable">
+                <div class="list-view--media">
+                    <img src="images/game.jpg" />
+                </div>
+                <div class="list-view--description">
+                    <h2>Game 02</h2>
                     <p>#2 among your friends</p>
                     <p>#126 among 1237 players</p>
                 </div>
@@ -75,6 +85,10 @@
         </div>
     </div>
 
+    <div class="content" data-page="/game" style="display: none;">
+        <h2>Game Page</h2>
+    </div>
+
     <script src="js/jquery.js"></script>
     <script src="js/consts.js"></script>
     <script src="js/dNav.js"></script>
@@ -89,7 +103,12 @@
         }
 
         GameHub.Menu.init();
+        GameHub.init();
+        page({
+            hashbang: true
+        });
         dNav.init();
+
     </script>
 </body>
 </html>
