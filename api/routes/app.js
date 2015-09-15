@@ -1,3 +1,5 @@
+var AppModel = require('../models/app.js');
+
 module.exports = {
   get: function (req, res) {
     console.log('GET: app.js', req.query);
