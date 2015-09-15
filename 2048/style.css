@@ -31,9 +31,14 @@ header div {
 	display: inline-block; width: 250px; }
 header p { margin: 0px; }
 .score {
-	position: absolute; top: 40px; right: 40px; font-size: 40px;
+	position: absolute; top: 40px; right: 40px; font-size: 40px; width: 200px; text-align: right;
 }
 #score { line-height: 50px; margin: 0; }
+
+.gamehub {
+	margin-top: 40px;
+	font-size: .5em;
+}
 
 #game { position: absolute; top: 50%; left: 50%; margin-top: -250px; margin-left: -250px; width: 500px; height: 500px; }
 #game > div { position: absolute; top: 0px; left: 0px;  }
