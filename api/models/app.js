@@ -31,6 +31,7 @@ AppSchema.statics.auth = function (id) {
   }
 
   return new Promise(function (res, rej) {
+
     AppModel.find({
       appId: id
     }, function (err, apps) {
@@ -39,23 +40,34 @@ AppSchema.statics.auth = function (id) {
       }
 
       var app;
+      var created = false;
       if (apps.length == 0) {
+        console.log('app.auth: Create new app ' + id);
+        created = true;
+
         app = new AppModel({
           appId: id
         });
+      } else if (apps.length > 1) {
+        return rej(new Error('More then one app with the same id'));
       } else {
         app = apps[0];
       }
 
       auth(id).then(function (obj) {
+        console.log('app.auth: Auth ', app);
         
-        app.save(function (err) {
-          if (err) {
-            return res(err);
-          }
+        if (created) {
+          app.save(function (err) {
+            if (err) {
+              return res(err);
+            }
 
+            return res(app);
+          });
+        } else {
           return res(app);
-        });
+        }
       }, function (err) {
         rej(err);
       });

@@ -79,6 +79,7 @@ UserSchema.statics.validate = function (token) {
 
       if (users.length) {
         user = users[0];
+        console.log('user.validate: ', user);
 
         // XXX: validate token
         return res(user);
