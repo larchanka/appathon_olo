@@ -329,3 +329,8 @@ touchElem.getElementsByTagName("div")[3].onclick = function() { moveGrid(4); }
 
 initGrid();
 initBest();
+
+var hub = new HUB();
+hub.init('com.olo.hub', function() {
+	console.log(hub.user.getData());
+});
