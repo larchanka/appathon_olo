@@ -117,6 +117,10 @@ AppSchema.methods.setScore = function (user, score) {
 
   var changed = false;
 
+  // if there is a dot in a username, replace it with _
+  //
+  username = username.replace(/\./g, '_');
+
   var currentScore = players[username];
   if (!currentScore) {
     players[username] = score;
