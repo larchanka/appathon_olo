@@ -37,9 +37,6 @@
     };
 
     GameHub.init = function() {
-        // page('/', GameHub.showGames);
-        // page('/friends', GameHub.showFriends);
-        // page('/game/:id', GameHub.showGame);
     };
 
 })();

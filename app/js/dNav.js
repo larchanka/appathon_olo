@@ -10,35 +10,36 @@
         keyActions: {}
     };
 
-    _bindKeyboardEvents = function (keyActions) {
-        var onKeyDown = function (e) {
-            switch (e.keyCode) {
-                case CONTROL_KEYS['left']:
-                    dNav.moveSelection([-1, 0]);
-                    break;
-                case CONTROL_KEYS['up']:
-                    dNav.moveSelection([0, -1]);
-                    break;
-                case CONTROL_KEYS['right']:
-                    dNav.moveSelection([1, 0]);
-                    break;
-                case CONTROL_KEYS['down']:
-                    dNav.moveSelection([0, 1]);
-                    break;
-                case CONTROL_KEYS['ok']:
-                    dNav.click(curEl);
-                    break;
+    var onKeyDown = function (e) {
+        switch (e.keyCode) {
+            case CONTROL_KEYS['left']:
+                dNav.moveSelection([-1, 0]);
+                break;
+            case CONTROL_KEYS['up']:
+                dNav.moveSelection([0, -1]);
+                break;
+            case CONTROL_KEYS['right']:
+                dNav.moveSelection([1, 0]);
+                break;
+            case CONTROL_KEYS['down']:
+                dNav.moveSelection([0, 1]);
+                break;
+            case CONTROL_KEYS['ok']:
+                dNav.click(curEl);
+                break;
+        }
+
+        $.each(keyActions, function (i, keyAction) {
+            if (e.keyCode == keyAction['keyCode'] && typeof keyAction['action'] == 'function') {
+                keyAction['action'](e);
             }
+        });
 
-            $.each(keyActions, function (i, keyAction) {
-                if (e.keyCode == keyAction['keyCode'] && typeof keyAction['action'] == 'function') {
-                    keyAction['action'](e);
-                }
-            });
+        e.preventDefault();
+        return false;
+    };
 
-            e.preventDefault();
-            return false;
-        };
+    _bindKeyboardEvents = function (keyActions) {
         $(dNav.options.containerSelector).off('click').off('keydown', onKeyDown);
 
         $(dNav.options.containerSelector).on('click', dNav.options.elSelector, function () {

@@ -2,6 +2,8 @@ var AppModel = require('../models/app.js');
 
 module.exports = {
   post: function (req, res) {
+    console.log('POST /api/appauth', req.body);
+
     var body = req.body;
     AppModel.auth(body.appId).then(function (obj) {
       return res.send({
@@ -15,6 +17,8 @@ module.exports = {
   },
 
   get: function (req, res) {
+    console.log('GET /api/appauth', req.query);
+
     res.json({
       message: 'App Auth'
     });
