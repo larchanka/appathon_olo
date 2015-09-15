@@ -66,7 +66,10 @@ AppSchema.methods.getScores = function () {
   }
 
   players = Object.keys(players).map(function (username) {
-    return players[username];
+    return {
+      username: username,
+      score: players[username]
+    }
   });
 
   return players.sort(function (a, b) {
