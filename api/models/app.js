@@ -72,7 +72,6 @@ AppSchema.methods.getScores = function () {
     }
   });
 
-  console.log('current scores', players);
   return players.sort(function (a, b) {
     return Number(a.score) < Number(b.score);
   });
@@ -92,21 +91,32 @@ AppSchema.methods.setScore = function (user, score) {
   // app is found
   var username = user.username;
 
-  this.markModified('players');
 
   var players = this.players;
   if (!players) {
-    players = this.players = {};
+    players = {};
   }
+
+  var changed = false;
 
   var currentScore = players[username];
   if (!currentScore) {
-      this.players[username] = score;
+    players[username] = score;
+    changed = true;
   } else if (Number(currentScore) < Number(score)) {
-    this.players[username] = score;
+    players[username] = score;
+    changed = true;
   }
 
-  return this.saveMe();
+  if (changed) {
+    this.markModified('players');
+    this.players = players;
+
+    return this.saveMe();
+  } else {
+    return Promise.resolve(this);
+  }
+
 }
 
 module.exports = mongoose.model('App', AppSchema);

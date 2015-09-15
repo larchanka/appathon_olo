@@ -27,8 +27,8 @@ scoreRoute.__set__('auth', auth);
 
 describe('api', function () {
 
-  var username = 'user-name-4';
-  var score = '1000';
+  var username = 'user-name-5';
+  var score = '1002';
 
   it('should correcty break on POST', function (done) {
     var req = {
@@ -49,10 +49,29 @@ describe('api', function () {
     scoreRoute.post(req, res);
   });
 
-  it('should post data to app', function (done) {
+  it('should post data to app 2', function (done) {
     var req = {
       body: {
         score: score,
+        appId: 'com.olo.test',
+        session: username
+      }
+    };
+
+    var res = {
+      send: function (result) {
+        console.log('result is', result);
+        return done();
+      }
+    };
+
+    return scoreRoute.post(req, res)
+  });
+
+  it('should post data to app', function (done) {
+    var req = {
+      body: {
+        score: Number(score) + 1,
         appId: 'com.olo.test',
         session: username
       }
