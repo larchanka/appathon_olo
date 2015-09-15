@@ -8,6 +8,9 @@
     <link rel="stylesheet" type="text/css" href="fonts/InterstatePro-Regular/styles.css">
 </head>
 <body>
+    <div class="logo">
+        <img src="images/logo.png">
+    </div>
     <ul class="tabbar">
         <li class="tabbar--item" data-route="/">Games</li>
         <li class="tabbar--item" data-route="/friends">Friends</li>
@@ -16,12 +19,22 @@
 
     <div class="content" data-page="/">
         <ul class="list-view">
-            <li class="list-view--item clickable">
+            <li class="list-view--item clickable" data-action="page('/game/1')">
                 <div class="list-view--media">
                     <img src="images/game.jpg" />
                 </div>
                 <div class="list-view--description">
                     <h2>Game 01</h2>
+                    <p>#2 among your friends</p>
+                    <p>#126 among 1237 players</p>
+                </div>
+            </li>
+            <li class="list-view--item clickable">
+                <div class="list-view--media">
+                    <img src="images/game.jpg" />
+                </div>
+                <div class="list-view--description">
+                    <h2>Game 02</h2>
                     <p>#2 among your friends</p>
                     <p>#126 among 1237 players</p>
                 </div>
@@ -48,7 +61,7 @@
         <div class="usermedia">
             <div class="usermedia--wrapper">
                 <img class="usermedia--pic" src="images/game.jpg" />
-                <h2 class="usermedia--heading">Firstname Lastname</h2>
+                <h3 class="usermedia--heading">Firstname Lastname</h3>
                 <p class="usermedia--description">1 game</p>
             </div>
         </div>
@@ -72,6 +85,10 @@
         </div>
     </div>
 
+    <div class="content" data-page="/game" style="display: none;">
+        <h2>Game Page</h2>
+    </div>
+
     <script src="js/jquery.js"></script>
     <script src="js/consts.js"></script>
     <script src="js/dNav.js"></script>
@@ -86,7 +103,12 @@
         }
 
         GameHub.Menu.init();
+        GameHub.init();
+        page({
+            hashbang: true
+        });
         dNav.init();
+
     </script>
 </body>
 </html>

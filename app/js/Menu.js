@@ -54,9 +54,6 @@
         page('/', _route);
         page('/friends', _route);
         page('/me', _route);
-        page({
-            hashbang: true
-        });
 
         _bindEvents(_selector);
     };

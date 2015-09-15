@@ -1,13 +1,18 @@
 (function() {
-    var GameHub = {
+    var GameHub = window.GameHub || GameHub;
 
+    GameHub.showGames = function() {
 
-        init: function() {
-
-        }
     };
 
-    GameHub.init();
+    GameHub.showGame = function(id) {
+        $('[data-page]').hide();
+        $('[data-page="/game"]').show();
+        dNav.init();
+    };
 
-    window.GameHub = window.GameHub || GameHub;
+    GameHub.init = function() {
+        page('/game/:id', GameHub.showGame);
+    };
+
 })();
