@@ -2,8 +2,7 @@ var UserModel = require('../models/user.js');
 
 module.exports = {
 
-  getSessionUser: function (req) {
-    var token = req.cookies['session'];
+  getSessionUser: function (token) {
     console.log('getSessionUser: session "', token, '"');
     return UserModel.validate(token);
   },

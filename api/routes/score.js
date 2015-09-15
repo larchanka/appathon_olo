@@ -6,10 +6,11 @@ module.exports = {
 
     var score = req.body.score;
     var appId = req.body.appId;
+    var session = req.body.session;
 
     var currentUser = null;
 
-    auth.getSessionUser(req).then(function (user) {
+    auth.getSessionUser(session).then(function (user) {
       currentUser = user
     }, function (err) {
       console.log('error');
@@ -51,9 +52,10 @@ module.exports = {
 
   get: function (req, res) {
     var appId = req.query.appId;
+    var session = req.query.session;
     var currentUser;
 
-    auth.getSessionUser(req).then(function (user) {
+    auth.getSessionUser(session).then(function (user) {
       currentUser = user
     }, function (err) {
       console.log('error');
