@@ -20,7 +20,7 @@ module.exports = {
     UserModel.auth(body.username, body.password).then(function (user) {
       console.log('user', user);
 
-      res.cookie('session', user.token, { maxAge: 900000, httpOnly: true });
+      res.cookie('session', user.token);
 
       return res.send({
         type: 'OK',
