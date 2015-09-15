@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
 
+
+// require all the models
+require('./models');
+
 mongoose.connect('mongodb://localhost/olo');
 
 var db = mongoose.connection;
