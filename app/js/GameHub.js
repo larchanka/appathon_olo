@@ -3,17 +3,43 @@
 
     GameHub.showGames = function() {
         var games = hub.games.list();
-    };
-
-    GameHub.showGame = function(id) {
-        $('[data-page]').hide();
-        $('[data-page="/game"]').show();
+        var placeHolder = document.getElementById("gamesListView");
+        placeHolder.innerHTML = tmpl("gameListTemplate", {data:games});
         dNav.init();
     };
 
+    GameHub.showGame = function(route) {
+        var route = document.location.hash;
+        var row = route.split('/');
+        var id = row[2];
+        hub.games.get(id)
+            .then(function(data) {
+                alert(3)
+                console.log(data)
+                $('[data-page]').hide();
+                $('[data-page="/game"]').show();
+            })
+            .catch(function(err) {
+                console.log(err)
+            });
+    };
+
+    GameHub.showFriends = function() {
+        var friends = hub.friends.get();
+        var placeHolder = document.getElementById("friendsListView");
+        placeHolder.innerHTML = tmpl("friendsListTemplate", {data:friends});
+    };
+
+    GameHub.showMe = function() {
+        var me = hub.user.getData();
+        var placeHolder = document.getElementById("meView");
+        placeHolder.innerHTML = tmpl("meTemplate", {data:me});
+    };
+
     GameHub.init = function() {
-        page('/', )
-        page('/game/:id', GameHub.showGame);
+        // page('/', GameHub.showGames);
+        // page('/friends', GameHub.showFriends);
+        // page('/game/:id', GameHub.showGame);
     };
 
 })();

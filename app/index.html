@@ -18,50 +18,58 @@
     </ul>
 
     <div class="content" data-page="/">
-        <ul class="list-view">
-            <li class="list-view--item clickable" data-action="page('/game/1')">
-                <div class="list-view--media">
-                    <img src="images/game.jpg" />
-                </div>
-                <div class="list-view--description">
-                    <h2>Game 01</h2>
-                    <p>#2 among your friends</p>
-                    <p>#126 among 1237 players</p>
-                </div>
-            </li>
-            <li class="list-view--item clickable">
-                <div class="list-view--media">
-                    <img src="images/game.jpg" />
-                </div>
-                <div class="list-view--description">
-                    <h2>Game 02</h2>
-                    <p>#2 among your friends</p>
-                    <p>#126 among 1237 players</p>
-                </div>
-            </li>
+        <ul class="list-view" id="gamesListView">
+            <!-- TMP PLACE -->
         </ul>
     </div>
+
+    <script type="text/template" id="gameListTemplate">
+        <% for ( var i = 0; i < data.length; i++ ) { %>
+            <% var item = data[i]; %>
+            <li class="list-view--item clickable" data-action="window.location.hash='/game/<%=item.appdId%>'">
+                <div class="list-view--media">
+                    <img src="<%=item.image%>" />
+                </div>
+                <div class="list-view--description">
+                    <h2><%=item.name%></h2>
+                    <p>#<%=item.stats.friends%> among your friends</p>
+                    <p>#<%=item.stats.total%> among 1237 players</p>
+                </div>
+            </li>
+        <% } %>
+    </script>
 
     <div class="content" data-page="/friends" style="display: none;">
-        <ul class="list-view">
-            <li class="list-view--item clickable">
-                <div class="list-view--media">
-                    <img src="images/game.jpg" />
-                </div>
-                <div class="list-view--description">
-                    <h2>Friend 01</h2>
-                    <p>Plays 4 games</p>
-                    <p>1 game in common</p>
-                </div>
-            </li>
+        <ul class="list-view" id="friendsListView">
+            <!-- TMP PLACE -->
         </ul>
     </div>
 
-    <div class="content" data-page="/me" style="display: none;">
+    <script type="text/template" id="friendsListTemplate">
+        <% for ( var i = 0; i < data.length; i++ ) { %>
+            <% var item = data[i]; %>
+            <li class="list-view--item clickable">
+                <div class="list-view--media">
+                    <img src="<%=item.image%>" />
+                </div>
+                <div class="list-view--description">
+                    <h2><%=item.name%></h2>
+                    <p>Plays <%=item.games%> games</p>
+                    <p><%=item.common%> game in common</p>
+                </div>
+            </li>
+        <% } %>
+    </script>
+
+    <div class="content" data-page="/me" style="display: none;" id="meView">
+        <!-- TMP PLACE -->
+    </div>
+
+    <script type="text/template" id="meTemplate">
         <div class="usermedia">
             <div class="usermedia--wrapper">
-                <img class="usermedia--pic" src="images/game.jpg" />
-                <h3 class="usermedia--heading">Firstname Lastname</h3>
+                <img class="usermedia--pic" src="images/4.png" />
+                <h3 class="usermedia--heading"><%=data.userData.givenName%> <%=data.userData.lastName%></h3>
                 <p class="usermedia--description">1 game</p>
             </div>
         </div>
@@ -83,7 +91,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </script>
 
     <div class="content" data-page="/game" style="display: none;">
         <div class="game">
@@ -154,28 +162,9 @@
         </div>
     </div>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/consts.js"></script>
-    <script src="js/dNav.js"></script>
-    <script src="js/page.js"></script>
-    <script src="js/Menu.js"></script>
-    <script src="js/GameHub.js"></script>
-    <script src="../SDK/src/fetch.js"></script>
-    <script src="../SDK/src/hub-sdk.js"></script>
+    <script src="js/fetch.js"></script>
+    <script src="js/hub-sdk.js"></script>
     <script>
-
-        window.onerror = function(msg, url, linenumber) {
-            $('.content').append('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-            return true;
-        }
-
-        GameHub.Menu.init();
-        GameHub.init();
-        page({
-            hashbang: true
-        });
-        dNav.init();
-
         // Simple JavaScript Templating
         // John Resig - http://ejohn.org/ - MIT Licensed
         (function(){
@@ -206,7 +195,6 @@
                   .split("%>").join("p.push('")
                   .split("\r").join("\\'")
               + "');}return p.join('');");
-           
             // Provide some basic currying to the user
             return data ? fn( data ) : fn;
           };
@@ -214,7 +202,22 @@
 
         var hub = new HUB();
         hub.init('com.olo.hub');
+        window.location.hash = '/';
+    </script>
+    <script src="js/jquery.js"></script>
+    <script src="js/consts.js"></script>
+    <script src="js/dNav.js"></script>
+    <script src="js/page.js"></script>
+    <script src="js/Menu.js"></script>
+    <script src="js/GameHub.js"></script>
+    <script>
+        // window.onerror = function(msg, url, linenumber) {
+        //     $('.content').append('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+        //     return true;
+        // }
 
+        GameHub.Menu.init();
+        dNav.init();
     </script>
 </body>
 </html>
