@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
 var superagent = require('superagent');
 
+var AppModel = require('./app.js');
+var ScoreModel = require('./score.js');
+
 var UserSchema = mongoose.Schema({
   username: String,
-  password: String,
-  details: mongoose.Schema.Types.Mixed
+  token   : String,
+  details: mongoose.Schema.Types.Mixed,
+  scores: [] //score ids
 });
 
 var auth = function (username, password) {
@@ -33,6 +37,59 @@ var auth = function (username, password) {
   });
 }
 
+UserSchema.methods.saveMe = function () {
+  var user = this;
+  return new Promise(function (res, rej) {
+    user.save(function (err) {
+      if (err) { return rej(err); }
+      return res();
+    });
+  });
+}
+
+UserSchema.methods.getScores = function () {
+  return this.scores.sort(function (a, b) {
+    return a.date < b.date;
+  });
+}
+
+UserSchema.methods.addScore = function (appId, score) {
+
+  this.scores.push({
+    score: score,
+    date: new Date().getTime()
+  });
+
+  return this.saveMe();
+}
+
+UserSchema.statics.validate = function (token) {
+  // will fetch username from database, take it's cookie and will try to reauthenticate
+  // into the system with the token
+  var UserModel = this.model('User');
+
+  return new Promise(function (res, rej) {
+
+    UserModel.find({
+      token: token || 'unknown'
+    }, function (err, users) {
+      if (err) {
+        return rej(err);
+      }
+
+      if (users.length) {
+        user = users[0];
+
+        // XXX: validate token
+        return res(user);
+      } 
+
+      return rej();
+    });
+
+  });
+}
+
 UserSchema.statics.auth = function (username, password) {
 
   var UserModel = this.model('User');
@@ -56,9 +113,11 @@ UserSchema.statics.auth = function (username, password) {
 
         auth(username, password).then(function (obj) {
           user.details = obj.customer;
+          user.token = obj.oespToken;
+
           user.save(function () {
-            console.log('will save');
             return res({
+              token: user.token,
               details: user.details
             });
           });

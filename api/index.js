@@ -1,16 +1,24 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 
 require('./db.js');
 
 app.set('port', (process.env.PORT || 5000));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  console.log('req', req.method);
+  res.header("Access-Control-Allow-Origin", "http://localhost:9999");
+  res.header("Access-Control-Allow-Credentials", true);
+
+  if (req.method.toLowerCase() == 'options') {
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Cookie, Set-Cookie");
+  }
   next();
 });
+
+app.use(cookieParser());
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
