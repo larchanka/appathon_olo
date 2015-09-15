@@ -12,7 +12,7 @@
     };
 
     GameHub.init = function() {
-        page('/', )
+//        page('/', )
         page('/game/:id', GameHub.showGame);
     };
 
