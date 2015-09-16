@@ -260,7 +260,7 @@ var HUB = function() {
 						name: '2048 Free',
 						description: 'Nice game description. List of all features and possibilities.',
 						path: './game/index.html',
-						image: './images/game.jpg',
+						image: '../shell/images/2048-icon.png',
 						stats: {
 							friends: 1,
 							total: 1
@@ -295,7 +295,7 @@ var HUB = function() {
 					{
 						appdId: 'com.olo.test',
 						name: '2048 Free',
-						image: './images/game.jpg',
+						image: '../shell/images/2048-icon.png',
 						stats: {
 							friends: 1,
 							total: 1
