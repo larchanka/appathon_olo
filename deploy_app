@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+cd ..
+
+echo "rm -rf fs/*"
+rm -rf fs/*
+
+echo "cp -r appathon_olo/2048 fs/"
+cp -r appathon_olo/2048 fs/
+
+echo "cp -r appathon_olo/app fs/"
+cp -r appathon_olo/app fs/
+
+echo "cp -r appathon_olo/shell fs/"
+cp -r appathon_olo/shell fs/
+
+echo "cp -r appathon_olo/index.html fs/"
+cp -r appathon_olo/index.html fs/
+
+echo "ssh"
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@pi '/etc/init.d/S90wpe restart'
