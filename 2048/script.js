@@ -1,5 +1,5 @@
 // VALUES
-
+var isOver = false;
 var grid, gridElem = document.getElementById("grid");
 
 var touchElem = document.getElementById("touch");
@@ -218,6 +218,9 @@ function updateBest() {
 // GAME OVER FUNCTIONS
 
 function gameOver() {
+	if (isOver) return false;
+	isOver = true;
+	console.log('game over');
 	gridElem.setAttribute("class", "over");
 	$('#game').hide();
 	$('.gameover h1').html('Your score: ' + (score + sum) + 'pts');
@@ -325,6 +328,7 @@ function initGrid() {
 }
 
 function init() {
+	isOver = false;
 	gridElem.removeAttribute("class");
 
 	$('.gameover').hide();
