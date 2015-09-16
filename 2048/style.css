@@ -126,7 +126,7 @@ footer a:hover { color: #38F; text-decoration: underline; }
     padding: .3em 1em;
 }
 
-.leaderboard .current-item {
+.leaderboard tr.current-item {
 	background-color: #333;
 	color: #fff;
 }
