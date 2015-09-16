@@ -228,7 +228,7 @@ var HUB = function() {
 					},
 					{
 						id: 2,
-						name: 'Maks Nemijs',
+						name: 'Maks Nemisj',
 						image: './images/friends/2.jpg',
 						games: 2,
 						common: 1
