@@ -105,23 +105,25 @@
                 <p><%=game.stats.friends%> friends play this</p>
             </div>
             <div class="game--wrapper">
-                <table class="leaderboard" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <th width="1">#</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                    </tr>
-                    <% for ( var i = 0; i < data.leaderboard.length; i++ ) { %>
-                        <% if(i < 9) { %>
-                            <% var item = data.leaderboard[i]; %>
-                            <tr>
-                                <td><%=(i+1)%></td>
-                                <td><%=item.name%></td>
-                                <td><%=item.score%></td>
-                            </tr>
+                <% if(leaderboard.length) { %>
+                    <table class="leaderboard" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th width="1">#</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        <% for ( var i = 0; i < leaderboard.length; i++ ) { %>
+                            <% if(i < 9) { %>
+                                <% var item = leaderboard[i]; %>
+                                <tr>
+                                    <td><%=(i+1)%></td>
+                                    <td><%=item.name%></td>
+                                    <td><%=item.score%></td>
+                                </tr>
+                            <% } %>
                         <% } %>
-                    <% } %>
-                </table>
+                    </table>
+                <% } %>
             </div>
         </div>
     </script>
