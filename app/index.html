@@ -115,7 +115,7 @@
                             <th>Score</th>
                         </tr>
                         <% for ( var i = 0; i < leaderboard.length; i++ ) { %>
-                            <% if(i < 9) { %>
+                            <% if(i < 10) { %>
                                 <% var item = leaderboard[i]; %>
                                 <% var className = (item.username === thisUser.userName ? 'current' : ''); %>
                                 <tr class="<%=className%>">

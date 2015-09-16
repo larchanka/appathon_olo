@@ -98,10 +98,10 @@ footer a:hover { color: #38F; text-decoration: underline; }
 .leaderboard {
 	position: absolute;
 	font-size: 1.5em;
-	top: 50%;
+	top: 40px;
 	left: 50%;
 	margin-left: -250px;
-	margin-top: -250px;
+	/*margin-top: -250px;*/
 	width: 500px;
 	height: 500px;
 }
