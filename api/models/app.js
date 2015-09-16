@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var AppSchema = mongoose.Schema({
   appId: String,
-  players: mongoose.Schema.Types.Mixed
+  scores: Array
 });
 
 
@@ -76,23 +76,8 @@ AppSchema.statics.auth = function (id) {
 
   });
 }
-
 AppSchema.methods.getScores = function () {
-  var players = this.players;
-  if (!players) {
-    players = {};
-  }
-
-  players = Object.keys(players).map(function (username) {
-    return {
-      username: username,
-      score: players[username]
-    }
-  });
-
-  return players.sort(function (a, b) {
-    return Number(a.score) < Number(b.score);
-  });
+  return this.scores;
 }
 
 AppSchema.methods.saveMe = function () {
@@ -109,33 +94,48 @@ AppSchema.methods.setScore = function (user, score) {
   // app is found
   var username = user.username;
 
+  var originalScores = [];
+  var scores = [];
 
-  var players = this.players;
-  if (!players) {
-    players = {};
+  if (Array.isArray(this.scores)) {
+    originalScores = this.scores.concat([]);
+    scores = this.scores.concat([]);
   }
-
-  var changed = false;
 
   // if there is a dot in a username, replace it with _
   //
   username = username.replace(/\./g, '_');
 
-  var currentScore = players[username];
-  if (!currentScore) {
-    players[username] = score;
-    changed = true;
-  } else if (Number(currentScore) < Number(score)) {
-    players[username] = score;
-    changed = true;
-  }
+  scores.push({
+    username: username,
+    score: score
+  });
+
+  scores = scores.sort(function (a, b) {
+    return Number(a.score) < Number(b.score);
+  });
+
+  scores = scores.slice(0, 9);
+
+  var changed = scores.some(function (item, index) {
+    var original = originalScores[index] || {};
+    if (item.score !== original.score) {
+      return true;
+    } else if (item.username !== original.username) {
+      return true;
+    }
+
+    return false;
+  });
 
   if (changed) {
-    this.markModified('players');
-    this.players = players;
+    console.log('Will set scores', scores);
+    this.markModified('scores');
+    this.scores = scores;
 
     return this.saveMe();
   } else {
+    console.log('will not set scores');
     return Promise.resolve(this);
   }
 
