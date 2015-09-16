@@ -8,10 +8,6 @@ var HUB = function() {
 	var TMP = {
 		username: 'hackathon19',
 		password: 'Hackathon19!'
-		// username: 'orionprodnl09',
-		// password: 'Welkom910'
-		// username: 'nvierhout',
-		// password: 'password'
 	};
 
 	var _userName,
