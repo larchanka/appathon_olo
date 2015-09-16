@@ -1,9 +1,26 @@
+html {
+
+}
+
+body {
+	background-color: black;
+}
+
 .grid {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.action-button {
+	border: 3px solid transparent;
+
+	border-radius: 14px;
 
 }
 
 .action-button.active {
-	border: 1px dotted red;
+	border: 3px solid white;
+
 }
 
 .grid .row:after{
@@ -34,16 +51,12 @@
 	height: 100%;
 }
 
-.game-center {
-	height: 100%;
-	border: 1px solid black;
+.item img {
+	width: 100%;
+	display: block;
+	border-radius: 12px;
 }
 
-
-.game {
-	height: 100%;
-	border: 1px solid black;
-}
 
 body.full-screen .grid {
 	display: none;
