@@ -14,10 +14,11 @@
         var id = row[2];
         hub.games.get(id)
             .then(function(data) {
-                alert(3)
                 console.log(data)
-                $('[data-page]').hide();
-                $('[data-page="/game"]').show();
+                // $('[data-page]').hide();
+                // $('[data-page="/game"]').show();
+                // var placeHolder = document.getElementById("gameView");
+                // placeHolder.innerHTML = tmpl("gameTemplate", data);
             })
             .catch(function(err) {
                 console.log(err)
