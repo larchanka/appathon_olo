@@ -1,6 +1,7 @@
 // VALUES
 var isOver = false;
 var grid, gridElem = document.getElementById("grid");
+var currentUser = null;
 
 var touchElem = document.getElementById("touch");
 
@@ -225,6 +226,7 @@ function gameOver() {
 	$('#game').hide();
 	$('.gameover h1').html('Your score: ' + (score + sum) + 'pts');
 	$('.gameover').show();
+  var total = score + sum;
 	hub.score.set(score + sum).then(function() {
 		hub.leaderBoard.get(10).then(function(response) {
 			return response.json();
@@ -237,8 +239,14 @@ function gameOver() {
 	            </tr>';
 				$('.gameover').hide();
 				$.each(data.scores, function(i, score) {
-					console.log(score.username, score.score);
-					s += '<tr>\
+          var isCurrent = (score.username === currentUser);
+          var className = '';
+          if (isCurrent) {
+            if (score.score == total) {
+              className = 'current-item';
+            }
+          }
+					s += '<tr class="' + className +'">\
 			                <td>' + (i + 1) +  '</td>\
 			                <td style="text-align: left;">' + (score.username) +  '</td>\
 			                <td>' + (score.score) + '</td>\
@@ -359,6 +367,7 @@ initBest();
 var hub = new HUB();
 hub.init('com.olo.hub', function() {
 	var userdata = hub.user.getData();
+  currentUser = userdata.userName;
 	$('.gamehub .username').html(userdata.userName);
 	setTimeout(function() {
 		$('.gamehub').slideDown(300);
