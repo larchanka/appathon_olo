@@ -328,3 +328,11 @@ ul {
     text-align: right;
     padding: 0 1em;
 }
+
+tr.current {
+    background-color: rgba(0, 170, 221, 0.3) !important;
+}
+
+tr.current:nth-child(odd) {
+    background-color: rgba(0, 170, 221, 0.1) !important;
+}

@@ -98,6 +98,7 @@
     </div>
 
     <script type="text/template" id="gameTemplate">
+        <% var thisUser = hub.user.getData(); %>
         <div class="game">
             <div class="game--wrapper">
                 <img src="<%=game.image%>" />
@@ -115,9 +116,13 @@
                         <% for ( var i = 0; i < leaderboard.length; i++ ) { %>
                             <% if(i < 9) { %>
                                 <% var item = leaderboard[i]; %>
-                                <tr>
+                                <% var className = (item.username === thisUser.userName ? 'current' : ''); %>
+                                <tr class="<%=className%>">
                                     <td><%=(i+1)%></td>
-                                    <td><%=item.username%></td>
+                                    <td>
+                                        <%=item.username%>
+                                        <% /*=(item.username === thisUser.userName ? '(you)' : '')*/%>
+                                    </td>
                                     <td><%=item.score%></td>
                                 </tr>
                             <% } %>
@@ -130,7 +135,6 @@
 
     <script type="text/javascript" src="../SDK/src/fetch.js"></script>
     <script type="text/javascript" src="../SDK/src/hub-sdk.js"></script>
-    <script type="text/javascript"></script>
     <script type="text/javascript" src="./js/jquery.js"></script>
     <script type="text/javascript" src="./js/consts.js"></script>
     <script type="text/javascript" src="./js/dNav.js"></script>
