@@ -77,7 +77,9 @@ AppSchema.statics.auth = function (id) {
   });
 }
 AppSchema.methods.getScores = function () {
-  return this.scores;
+  return this.scores.sort(function (a, b) {
+    return Number(a.score) < Number(b.score);
+  });
 }
 
 AppSchema.methods.saveMe = function () {
