@@ -297,7 +297,7 @@ var HUB = function() {
 						name: '2048 Free',
 						image: './images/game.jpg',
 						stats: {
-							friends: 2,
+							friends: 1,
 							total: 126
 						}
 					}
