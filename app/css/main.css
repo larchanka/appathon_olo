@@ -336,3 +336,18 @@ tr.current {
 tr.current:nth-child(odd) {
     background-color: rgba(0, 170, 221, 0.1) !important;
 }
+
+.hightest-score {
+    float: right;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+}
+.hightest-score small {
+    font-size: 0.5em;
+}
+.hightest-score i {
+    font-size: 0.5em;
+    font-style: normal;
+    display: block;
+}
