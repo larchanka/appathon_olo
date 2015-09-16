@@ -262,8 +262,8 @@ var HUB = function() {
 						path: './game/index.html',
 						image: './images/game.jpg',
 						stats: {
-							friends: 2,
-							total: 126
+							friends: 1,
+							total: 1
 						}
 					},
 					leaderboard: []
@@ -298,7 +298,7 @@ var HUB = function() {
 						image: './images/game.jpg',
 						stats: {
 							friends: 1,
-							total: 126
+							total: 1
 						}
 					}
 				];
