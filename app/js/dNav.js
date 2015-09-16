@@ -10,6 +10,9 @@
         keyActions: {}
     };
 
+
+    var prevKeyDown = null;
+
     _bindKeyboardEvents = function (keyActions) {
         var onKeyDown = function (e) {
             switch (e.keyCode) {
@@ -28,6 +31,12 @@
                 case CONTROL_KEYS['ok']:
                     dNav.click(curEl);
                     break;
+                case CONTROL_KEYS['menu']:
+                  var parentWindow = window.parent;
+                  if (parentWindow && parentWindow.AppStore) {
+                    parentWindow.AppStore.emit('quit');
+                  }
+                  break;
             }
 
             $.each(keyActions, function (i, keyAction) {
@@ -39,7 +48,10 @@
             e.preventDefault();
             return false;
         };
-        $(dNav.options.containerSelector).off('click').off('keydown', onKeyDown);
+
+        $(dNav.options.containerSelector).off('click').off('keydown', prevKeyDown);
+
+        prevKeyDown = onKeyDown;
 
         $(dNav.options.containerSelector).on('click', dNav.options.elSelector, function () {
             eval($(this).data('action'));

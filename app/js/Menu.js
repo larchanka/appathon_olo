@@ -11,16 +11,17 @@
         _current = (_current >= _els.length) ? 0 : _current;
         _current = (_current < 0) ? (_els.length - 1) : _current;
 
-        page($(_els[_current]).data('route'));
+        window.location.hash = $(_els[_current]).data('route');
     };
 
-    var _route = function(route) {
-        var path = route.path;
+    var _route = function() {
+        var route = document.location.hash;
+        var row = route.split('/');
+        var path = '/' + row[1];
         var el = $('[data-route="' + path + '"]');
         console.log('[data-route="' + path + '"]')
 
         _current = _els.index(el);
-        console.log(_current)
         _els.removeClass(_activeClass);
         $(_els[_current]).addClass(_activeClass);
 
@@ -51,9 +52,28 @@
 
     Menu.init = function() {
 
-        page('/', _route);
-        page('/friends', _route);
-        page('/me', _route);
+        var routes = {
+            '/': function(route) {
+                _route(route);
+                GameHub.showGames(route);
+            },
+            '/friends': function(route) {
+                _route(route);
+                GameHub.showFriends(route);
+            },
+            '/me': function(route) {
+                _route(route);
+                GameHub.showMe(route);
+            },
+            '/game/:id': function(route) {
+                _route({path: '/game'});
+                GameHub.showGame();
+            }
+        };
+
+        var router = Router(routes);
+
+        router.init();
 
         _bindEvents(_selector);
     };
