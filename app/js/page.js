@@ -15,7 +15,7 @@
  *
  */
 
-var dloc = document.location;
+var dloc = location;
 
 function dlocHashEmpty() {
   // Non-IE browsers return '' when the address bar shows '#'; Director's logic
