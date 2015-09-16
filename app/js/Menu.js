@@ -40,7 +40,7 @@
                     _moveSelection(1);
                     break;
                 case CONTROL_KEYS['back']:
-                    page.back();
+                    history.back();
                     break;
             }
 
