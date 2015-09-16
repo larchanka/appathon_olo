@@ -9,7 +9,7 @@
     };
 
     GameHub.showGame = function(route) {
-        var route = document.location.hash;
+        var route = location.hash;
         var row = route.split('/');
         var id = row[2];
         hub.games.get(id)
@@ -39,5 +39,6 @@
 
     GameHub.init = function() {
     };
-
+    
+    window.GameHub = GameHub;
 })();

@@ -15,7 +15,7 @@
  *
  */
 
-var dloc = document.location;
+var dloc = location;
 
 function dlocHashEmpty() {
   // Non-IE browsers return '' when the address bar shows '#'; Director's logic
@@ -24,7 +24,7 @@ function dlocHashEmpty() {
 }
 
 var listener = {
-  mode: 'modern',
+  mode: 'hash',
   hash: dloc.hash,
   history: false,
 
@@ -46,6 +46,7 @@ var listener = {
   },
 
   init: function (fn, history) {
+    
     var self = this;
     this.history = history;
 
