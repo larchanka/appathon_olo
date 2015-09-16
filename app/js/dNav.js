@@ -31,11 +31,8 @@
                 case CONTROL_KEYS['ok']:
                     dNav.click(curEl);
                     break;
-                case CONTROL_KEYS['menu']:
-                  var parentWindow = window.parent;
-                  if (parentWindow && parentWindow.AppStore) {
-                    parentWindow.AppStore.emit('quit');
-                  }
+                case 27:
+                  document.location = '../index.html';
                   break;
             }
 
