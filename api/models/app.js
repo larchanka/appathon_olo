@@ -115,7 +115,7 @@ AppSchema.methods.setScore = function (user, score) {
     return Number(a.score) < Number(b.score);
   });
 
-  scores = scores.slice(0, 9);
+  scores = scores.slice(0, 10);
 
   var changed = scores.some(function (item, index) {
     var original = originalScores[index] || {};
