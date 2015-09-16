@@ -252,9 +252,6 @@ var HUB = function() {
 				* @returns {object}
 				**/
 			get: function(appId) {
-				if (!appId) {
-					return false;
-				}
 
 				var _data = {
 					score: 0,
@@ -283,7 +280,7 @@ var HUB = function() {
 						return response.json();
 					})
 					.then(function(data) {
-						_data.leaderboard = data.message;
+						_data.leaderboard = data.scores;
 						return _data;
 					});
 			},
