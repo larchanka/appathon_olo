@@ -29,6 +29,7 @@ body {
 	left: 25%;
 	width: 150px;
 	height: 150px;
+	transition: width 0.3s, height 0.3s, margin-left 0.3s, margin-top 0.3s;
 }
 
 .item.active {
