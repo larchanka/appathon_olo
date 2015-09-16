@@ -39,5 +39,6 @@
 
     GameHub.init = function() {
     };
-
+    
+    window.GameHub = GameHub;
 })();
