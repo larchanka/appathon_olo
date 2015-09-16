@@ -11,11 +11,11 @@
         _current = (_current >= _els.length) ? 0 : _current;
         _current = (_current < 0) ? (_els.length - 1) : _current;
 
-        window.location.hash = $(_els[_current]).data('route');
+        location.hash = $(_els[_current]).data('route');
     };
 
     var _route = function() {
-        var route = document.location.hash;
+        var route = location.hash;
         var row = route.split('/');
         var path = '/' + row[1];
         var el = $('[data-route="' + path + '"]');
