@@ -31,7 +31,7 @@
                 case CONTROL_KEYS['ok']:
                     dNav.click(curEl);
                     break;
-                case CONTROL_KEYS['menu']:
+                case 27:
                   document.location = '../index.html';
                   break;
             }
