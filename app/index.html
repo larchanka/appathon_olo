@@ -26,7 +26,7 @@
     <script type="text/template" id="gameListTemplate">
         <% for ( var i = 0; i < data.length; i++ ) { %>
             <% var item = data[i]; %>
-            <li class="list-view--item clickable" data-action="window.location.hash='/game/<%=item.appdId%>'">
+            <li class="list-view--item clickable" data-action="document.location.hash='/game/<%=item.appdId%>'">
                 <div class="list-view--media">
                     <img src="<%=item.image%>" />
                 </div>
@@ -93,74 +93,40 @@
         </div>
     </script>
 
-    <div class="content" data-page="/game" style="display: none;">
+    <div class="content" data-page="/game" style="display: none;" id="gameView">
+        
+    </div>
+
+    <script type="text/template" id="gameTemplate">
         <div class="game">
             <div class="game--wrapper">
-                <img src="images/game.jpg" />
-                <h2>2048 Horizon Edition</h2>
-                <p>2 friends play this</p>
+                <img src="<%=game.image%>" />
+                <h2><%=game.name%></h2>
+                <p><%=game.stats.friends%> friends play this</p>
             </div>
             <div class="game--wrapper">
-                <table class="leaderboard" cellspacing="0" cellpadding="0">
-                    <tr>
-                        <th width="1">#</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Name</td>
-                        <td>Score</td>
-                    </tr>
-                </table>
+                <% if(leaderboard.length) { %>
+                    <table class="leaderboard" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th width="1">#</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        <% for ( var i = 0; i < leaderboard.length; i++ ) { %>
+                            <% if(i < 9) { %>
+                                <% var item = leaderboard[i]; %>
+                                <tr>
+                                    <td><%=(i+1)%></td>
+                                    <td><%=item.name%></td>
+                                    <td><%=item.score%></td>
+                                </tr>
+                            <% } %>
+                        <% } %>
+                    </table>
+                <% } %>
             </div>
         </div>
-    </div>
+    </script>
 
     <script src="js/fetch.js"></script>
     <script src="js/hub-sdk.js"></script>
@@ -202,7 +168,7 @@
 
         var hub = new HUB();
         hub.init('com.olo.hub');
-        window.location.hash = '/';
+        document.location.hash = '/';
     </script>
     <script src="js/jquery.js"></script>
     <script src="js/consts.js"></script>

@@ -24,7 +24,7 @@ var HUB = function() {
 			_defaultLeaderboardItemsNum = 10,
 			_hubappId = '',
 			_initialized = false,
-			_apiUrl = 'http://192.168.192.65:5000';
+			_apiUrl = 'http://olo.herokuapp.com';
 
 	var _api = {
 
