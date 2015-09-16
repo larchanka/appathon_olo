@@ -32,10 +32,7 @@
                     dNav.click(curEl);
                     break;
                 case CONTROL_KEYS['menu']:
-                  var parentWindow = window.parent;
-                  if (parentWindow && parentWindow.AppStore) {
-                    parentWindow.AppStore.emit('quit');
-                  }
+                  document.location = '../index.html';
                   break;
             }
 
