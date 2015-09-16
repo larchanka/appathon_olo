@@ -1,3 +1,8 @@
+window.debug = function (str) {
+  var node = document.getElementById('log');
+  node.appendChild(document.createElement('div')).innerHTML = str;
+};
+
 window.AppStore = {
   buttons : [],
   getNext: function (dir) {
@@ -23,6 +28,7 @@ window.AppStore = {
         return this.buttons.length - 1;
       }
     }
+
   },
 
   goRight: function () {
@@ -68,6 +74,12 @@ window.AppStore = {
 
     // put the first one, active
     this._setActive(arr[0]);
+
+    debug('inited');
+
+    window.onerror = function (e) {
+      debug(e.message);
+    }
   },
 
   _setInactive: function (node) {
@@ -110,10 +122,20 @@ window.AppStore = {
   },
 
   _openIFrame: function (src) {
+    document.location = src;
+    return;
+
     var node = document.getElementById('iframe-container');
     var iframe = document.createElement('iframe');
     iframe.src = src;
+    node.style.backgroundColor = 'red';
     node.appendChild(iframe);
+
+    iframe.onerror = function (e) {
+      debug('iframe error: ' + e.message);
+    }
+
+
     document.body.className = 'full-screen';
 
     setTimeout(function () {
@@ -121,7 +143,7 @@ window.AppStore = {
         //XXX: need correct node to focus
         iframe.contentWindow.focus();
       } catch (e) {
-        console.log('error', e);
+        debug('zork:' + e.message);
       }
     }, 500);
   },
