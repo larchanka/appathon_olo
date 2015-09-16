@@ -177,10 +177,10 @@
     <script src="js/Menu.js"></script>
     <script src="js/GameHub.js"></script>
     <script>
-        // window.onerror = function(msg, url, linenumber) {
-        //     $('.content').append('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-        //     return true;
-        // }
+        window.onerror = function(msg, url, linenumber) {
+            $('.content').append('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
+            return true;
+        }
 
         GameHub.Menu.init();
         dNav.init();
