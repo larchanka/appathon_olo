@@ -106,7 +106,7 @@ window.AppStore = {
 
     console.log('openGame');
     try {
-      AppStore._openIFrame('/app/index.html');
+      AppStore._openIFrame('./app/index.html');
     } catch (e) {
       console.error(e);
     }
@@ -115,7 +115,7 @@ window.AppStore = {
   openGame: function () {
     console.log('openGame');
     try {
-      AppStore._openIFrame('/2048/index.html');
+      AppStore._openIFrame('./2048/index.html');
     } catch (e) {
       console.error(e);
     }
