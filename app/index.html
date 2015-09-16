@@ -117,7 +117,7 @@
                                 <% var item = leaderboard[i]; %>
                                 <tr>
                                     <td><%=(i+1)%></td>
-                                    <td><%=item.name%></td>
+                                    <td><%=item.username%></td>
                                     <td><%=item.score%></td>
                                 </tr>
                             <% } %>
@@ -128,10 +128,17 @@
         </div>
     </script>
 
-    <script src="js/fetch.js"></script>
-    <script src="js/hub-sdk.js"></script>
-    <script>
-        // Simple JavaScript Templating
+    <script type="text/javascript" src="./js/fetch.js"></script>
+    <script type="text/javascript" src="./js/hub-sdk.js"></script>
+    <script type="text/javascript"></script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/consts.js"></script>
+    <script type="text/javascript" src="./js/dNav.js"></script>
+    <script type="text/javascript" src="./js/page.js"></script>
+    <script type="text/javascript" src="./js/Menu.js"></script>
+    <script type="text/javascript" src="./js/GameHub.js"></script>
+    <script type="text/javascript" type="text/javascript">
+    // Simple JavaScript Templating
         // John Resig - http://ejohn.org/ - MIT Licensed
         (function(){
           var cache = {};
@@ -166,23 +173,9 @@
           };
         })();
 
+        location.hash = '/';
         var hub = new HUB();
         hub.init('com.olo.hub');
-        location.hash = '/';
-        document.body.innerHTML = location.hash;
-    </script>
-    <script src="js/jquery.js"></script>
-    <script src="js/consts.js"></script>
-    <script src="js/dNav.js"></script>
-    <script src="js/page.js"></script>
-    <script src="js/Menu.js"></script>
-    <script src="js/GameHub.js"></script>
-    <script>
-        window.onerror = function(msg, url, linenumber) {
-            $('.content').append('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber);
-            return true;
-        }
-
         GameHub.Menu.init();
         dNav.init();
     </script>

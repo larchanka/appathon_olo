@@ -19,7 +19,6 @@
         var row = route.split('/');
         var path = '/' + row[1];
         var el = $('[data-route="' + path + '"]');
-        console.log('[data-route="' + path + '"]')
 
         _current = _els.index(el);
         _els.removeClass(_activeClass);
