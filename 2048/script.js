@@ -329,3 +329,10 @@ touchElem.getElementsByTagName("div")[3].onclick = function() { moveGrid(4); }
 
 initGrid();
 initBest();
+
+var hub = new HUB();
+hub.init('com.olo.hub', function() {
+	var userdata = hub.user.getData();
+	$('.gamehub span').html(userdata.userData.givenName);
+	$('.gamehub').show();
+});

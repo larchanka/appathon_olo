@@ -11,9 +11,36 @@ var UserSchema = mongoose.Schema({
   scores: [] //score ids
 });
 
+var mockData = ({ 
+  oespToken: 'cddac195bbbaef214f63ae7e775c78a71d7ba64fd5e7c7a978cfa0ae16940393',
+  username: 'hackathon19',
+  countryCode: 'NL',
+  languageCode: 'nld',
+  deviceCode: 'web',
+  locationId: '24443942973',
+  timeToIdleSeconds: 7200,
+  customer: 
+    { givenName: 'FOC (RONALD VAN RAVENSBERG)',
+      familyName: 'Liberty Global Exhibition 31',
+      gender: 'female',
+      status: [],
+      smartCardId: '0000509286',
+      stbType: 'HZN',
+      replayTvEntitled: true,
+      replayTvAvailable: true,
+      replayTvMinimumBroadcastTime: 0,
+      replayTvOptedIn: true 
+  }
+});
+
 var auth = function (username, password) {
   console.log('Will try to connect using', username, password);
 
+  if (username === 'hackathon19') {
+    return Promise.resolve(mockData);
+  }
+
+  var called = false;
   return new Promise(function (res, rej) {
     superagent
     .post('https://web-api2.horizon.tv/oesp/api/NL/nld/web/session')
@@ -23,8 +50,11 @@ var auth = function (username, password) {
       password: password
     })
     .end(function (error, response) {
-      console.log('error is', error);
+      if (called) { return; }
+      called = true;
+
       if (error) {
+        console.log('error is', error);
         return rej(error);
       }
 
@@ -97,36 +127,36 @@ UserSchema.statics.auth = function (username, password) {
 
   return new Promise(function (res, rej) {
     UserModel.find({
-        username: username
-      }, function (err, users) {
-        if (err) {
-          return rej(err);
-        }
+      username: username
+    }, function (err, users) {
+      if (err) {
+        return rej(err);
+      }
 
-        var user = null;
-        if (users.length == 0) {
-          user = new UserModel({
-            username: username
-          });
-        } else {
-          user = users[0];
-        }
+      var user = null;
+      if (users.length == 0) {
+        user = new UserModel({
+          username: username
+        });
+      } else {
+        user = users[0];
+      }
 
-        auth(username, password).then(function (obj) {
-          user.details = obj.customer;
-          user.token = obj.oespToken;
+      auth(username, password).then(function (obj) {
+        user.details = obj.customer;
+        user.token = obj.oespToken;
 
-          user.save(function () {
-            return res({
-              token: user.token,
-              details: user.details
-            });
-          });
-        }, function (err) {
-          return rej({
-            message: err.message
+        user.save(function () {
+          return res({
+            token: user.token,
+            details: user.details
           });
         });
+      }, function (err) {
+        return rej({
+          message: err.message
+        });
+      });
     });
   });
 };
