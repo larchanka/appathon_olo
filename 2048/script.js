@@ -1,5 +1,5 @@
 // VALUES
-
+var isOver = false;
 var grid, gridElem = document.getElementById("grid");
 
 var touchElem = document.getElementById("touch");
@@ -193,7 +193,7 @@ function updateLevel() {
 
 	var desc = getLevelText(level);
 
-	levelText.innerHTML = "Level " + level + (desc === "" ? "" : (" — " + desc));
+	//levelText.innerHTML = "Level " + level + (desc === "" ? "" : (" — " + desc));
 	levelBar.style.width = (level * 10) + "%";
 }
 
@@ -212,19 +212,44 @@ function updateBest() {
 	if(best < (score + sum))
 		setBest(score + sum);
 
-	bestElem.innerHTML = best + "pts";
+	//bestElem.innerHTML = best + "pts";
 }
 
 // GAME OVER FUNCTIONS
 
 function gameOver() {
+	if (isOver) return false;
+	isOver = true;
+	console.log('game over');
 	gridElem.setAttribute("class", "over");
 	$('#game').hide();
+	$('.gameover h1').html('Your score: ' + (score + sum) + 'pts');
 	$('.gameover').show();
-	setTimeout(function() {
-		$('.gameover').hide();
-		$('.leaderboard').show();
-	}, 2000);
+	hub.score.set(score + sum).then(function() {
+		hub.leaderBoard.get(10).then(function(response) {
+			return response.json();
+		}).then(function(data){
+			setTimeout(function() {
+				var s = '<tr>\
+	                <th width="1">#</th>\
+	                <th style="text-align: left;">Name</th>\
+	                <th>Score</th>\
+	            </tr>';
+				$('.gameover').hide();
+				$.each(data.scores, function(i, score) {
+					console.log(score.username, score.score);
+					s += '<tr>\
+			                <td>' + (i + 1) +  '</td>\
+			                <td style="text-align: left;">' + (score.username) +  '</td>\
+			                <td>' + (score.score) + '</td>\
+			            </tr>';
+				});
+				$('.leaderboard table').html(s);
+				$('.leaderboard').show();
+			}, 1000);
+		});
+	});
+
 
 }
 
@@ -303,6 +328,7 @@ function initGrid() {
 }
 
 function init() {
+	isOver = false;
 	gridElem.removeAttribute("class");
 
 	$('.gameover').hide();
@@ -334,5 +360,7 @@ var hub = new HUB();
 hub.init('com.olo.hub', function() {
 	var userdata = hub.user.getData();
 	$('.gamehub span').html(userdata.userData.givenName);
-	$('.gamehub').show();
+	setTimeout(function() {
+		$('.gamehub').slideDown(300);
+	}, 1000);
 });

@@ -77,10 +77,8 @@ header p { margin: 0px; }
 #touch div:nth-child(3) { bottom: 135px; right: 15px; width: 110px; height: 230px; }
 #touch div:nth-child(4) { bottom: 15px; right: 135px; width: 230px; height: 110px; }
 
-#text { color: black; position: absolute; height: 16px; bottom: 50px; left: 0; width: 100%; }
-#text p { position: absolute; top: 0px; margin-bottom: 0px; }
-#text p:first-child { left: 40px; }
-#text p:last-child { right: 40px; }
+#text { color: #999; position: absolute; height: 16px; bottom: 80px; text-align: center; left: 0; width: 100%; }
+
 
 #bar {
 	position: absolute; height: 20px; bottom: 0;

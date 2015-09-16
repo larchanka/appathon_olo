@@ -15,10 +15,10 @@
         hub.games.get(id)
             .then(function(data) {
                 console.log(data)
-                // $('[data-page]').hide();
-                // $('[data-page="/game"]').show();
-                // var placeHolder = document.getElementById("gameView");
-                // placeHolder.innerHTML = tmpl("gameTemplate", data);
+                $('[data-page]').hide();
+                $('[data-page="/game"]').show();
+                var placeHolder = document.getElementById("gameView");
+                placeHolder.innerHTML = tmpl("gameTemplate", data);
             })
             .catch(function(err) {
                 console.log(err)
